@@ -58,8 +58,8 @@ async def get_contact(m: Message, state: FSMContext, config):
     phone = m.contact.phone_number
     code = await send_code(phone, config)
     await state.update_data(code=code, phone=phone)
-    print(code)
-    await m.answer("Iltimos telefon raqamingizga kelgan sms kodni kiriting 📲", reply_markup=remove_btn)
+    await m.answer(f"Iltimos telefon raqamingizga kelgan sms kodni kiriting 📲\n"
+                   f"{code}", reply_markup=remove_btn)
     await UserStartState.next()
 
 
