@@ -5,23 +5,23 @@ from environs import Env
 
 @dataclass
 class DbConfig:
-    host: str
-    password: str
-    user: str
-    database: str
+    database_url: str
 
 
 @dataclass
 class TgBot:
     token: str
-    admin_ids: list[int]
+    admin_ids: list
+    group_ids: int
     use_redis: bool
 
 
 @dataclass
 class Miscellaneous:
-    other_params: str = None
-
+    sentry_sdk: str
+    playmobile_api: str
+    payme: str
+    click: str
 
 @dataclass
 class Config:
@@ -38,13 +38,16 @@ def load_config(path: str = None):
         tg_bot=TgBot(
             token=env.str("BOT_TOKEN"),
             admin_ids=list(map(int, env.list("ADMINS"))),
+            group_ids=env.int("GROUP"),
             use_redis=env.bool("USE_REDIS"),
         ),
         db=DbConfig(
-            host=env.str('DB_HOST'),
-            password=env.str('DB_PASS'),
-            user=env.str('DB_USER'),
-            database=env.str('DB_NAME')
+            database_url=env.str("DB_API")
         ),
-        misc=Miscellaneous()
+        misc=Miscellaneous(
+            sentry_sdk=env.str("SENTRY_SDK"),
+            playmobile_api=env.str("PLAYMOBILE_API"),
+            payme=env.str("PAYME"),
+            click=env.str("CLICK")
+        )
     )
