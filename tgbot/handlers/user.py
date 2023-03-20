@@ -17,7 +17,7 @@ async def user_start(m: Message, status):
                        reply_markup=main_menu_btn)
         await UserMenuState.get_menu.set()
     else:
-        await m.reply("Assalomu alaykum 👋\nUmma Forum botiga xush kelibsiz 😃\n Iltimos ismingizni kiriting!")
+        await m.reply("Assalomu alaykum 👋\nUmma Forum botiga xush kelibsiz 😃\nIltimos ismingizni kiriting!")
         await UserStartState.get_name.set()
 
 
